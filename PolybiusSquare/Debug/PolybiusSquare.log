@@ -1,18 +1,17 @@
 ﻿  main.cpp
-D:\Cryptography\PolybiusSquare\PolybiusSquare\main.cpp(72,22): warning C4018: '<': signed/unsigned mismatch
-D:\Cryptography\PolybiusSquare\PolybiusSquare\main.cpp(117,22): warning C4018: '<': signed/unsigned mismatch
-D:\Cryptography\PolybiusSquare\PolybiusSquare\main.cpp(159,20): warning C4018: '<': signed/unsigned mismatch
-D:\Cryptography\PolybiusSquare\PolybiusSquare\main.cpp(187,20): warning C4018: '<': signed/unsigned mismatch
-D:\Cryptography\PolybiusSquare\PolybiusSquare\main.cpp(232,20): warning C4018: '<': signed/unsigned mismatch
-D:\Cryptography\PolybiusSquare\PolybiusSquare\main.cpp(237,22): warning C4838: conversion from 'int' to 'char' requires a narrowing conversion
-D:\Cryptography\PolybiusSquare\PolybiusSquare\main.cpp(237,27): warning C4305: 'initializing': truncation from 'int' to 'char'
-D:\Cryptography\PolybiusSquare\PolybiusSquare\main.cpp(237,22): warning C4309: 'initializing': truncation of constant value
-D:\Cryptography\PolybiusSquare\PolybiusSquare\main.cpp(264,21): warning C4018: '<': signed/unsigned mismatch
-D:\Cryptography\PolybiusSquare\PolybiusSquare\main.cpp(334,20): warning C4018: '<': signed/unsigned mismatch
-D:\Cryptography\PolybiusSquare\PolybiusSquare\main.cpp(339,23): warning C4838: conversion from 'int' to 'char' requires a narrowing conversion
-D:\Cryptography\PolybiusSquare\PolybiusSquare\main.cpp(339,28): warning C4305: 'initializing': truncation from 'int' to 'char'
-D:\Cryptography\PolybiusSquare\PolybiusSquare\main.cpp(339,23): warning C4309: 'initializing': truncation of constant value
-D:\Cryptography\PolybiusSquare\PolybiusSquare\main.cpp(398,20): warning C4018: '<': signed/unsigned mismatch
-D:\Cryptography\PolybiusSquare\PolybiusSquare\main.cpp(411,21): warning C4018: '<': signed/unsigned mismatch
-D:\Cryptography\PolybiusSquare\PolybiusSquare\main.cpp(433,20): warning C4018: '<': signed/unsigned mismatch
-  PolybiusSquare.vcxproj -> D:\Cryptography\PolybiusSquare\PolybiusSquare\Debug\PolybiusSquare.exe
+E:\CST 407 Intro to Cryptography\Homework\PolybiusSquare\PolybiusSquare\main.cpp(72,22): warning C4018: '<': signed/unsigned mismatch
+E:\CST 407 Intro to Cryptography\Homework\PolybiusSquare\PolybiusSquare\main.cpp(117,22): warning C4018: '<': signed/unsigned mismatch
+E:\CST 407 Intro to Cryptography\Homework\PolybiusSquare\PolybiusSquare\main.cpp(183,20): warning C4018: '<': signed/unsigned mismatch
+E:\CST 407 Intro to Cryptography\Homework\PolybiusSquare\PolybiusSquare\main.cpp(224,20): warning C4018: '<': signed/unsigned mismatch
+E:\CST 407 Intro to Cryptography\Homework\PolybiusSquare\PolybiusSquare\main.cpp(229,23): warning C4838: conversion from 'int' to 'char' requires a narrowing conversion
+E:\CST 407 Intro to Cryptography\Homework\PolybiusSquare\PolybiusSquare\main.cpp(229,28): warning C4305: 'initializing': truncation from 'int' to 'char'
+E:\CST 407 Intro to Cryptography\Homework\PolybiusSquare\PolybiusSquare\main.cpp(229,23): warning C4309: 'initializing': truncation of constant value
+E:\CST 407 Intro to Cryptography\Homework\PolybiusSquare\PolybiusSquare\main.cpp(257,21): warning C4018: '<': signed/unsigned mismatch
+E:\CST 407 Intro to Cryptography\Homework\PolybiusSquare\PolybiusSquare\main.cpp(298,23): warning C4838: conversion from 'int' to 'char' requires a narrowing conversion
+E:\CST 407 Intro to Cryptography\Homework\PolybiusSquare\PolybiusSquare\main.cpp(298,28): warning C4305: 'initializing': truncation from 'int' to 'char'
+E:\CST 407 Intro to Cryptography\Homework\PolybiusSquare\PolybiusSquare\main.cpp(298,23): warning C4309: 'initializing': truncation of constant value
+E:\CST 407 Intro to Cryptography\Homework\PolybiusSquare\PolybiusSquare\main.cpp(310,20): warning C4018: '<': signed/unsigned mismatch
+E:\CST 407 Intro to Cryptography\Homework\PolybiusSquare\PolybiusSquare\main.cpp(376,20): warning C4018: '<': signed/unsigned mismatch
+E:\CST 407 Intro to Cryptography\Homework\PolybiusSquare\PolybiusSquare\main.cpp(389,21): warning C4018: '<': signed/unsigned mismatch
+E:\CST 407 Intro to Cryptography\Homework\PolybiusSquare\PolybiusSquare\main.cpp(411,20): warning C4018: '<': signed/unsigned mismatch
+  PolybiusSquare.vcxproj -> E:\CST 407 Intro to Cryptography\Homework\PolybiusSquare\PolybiusSquare\Debug\PolybiusSquare.exe

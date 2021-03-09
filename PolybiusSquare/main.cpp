@@ -13,7 +13,7 @@ void Decryption(int squareChoice, char keyword[], char keyWordSorted[], string p
 
 const char squareEdges[6] = { 'A', 'D', 'F', 'G', 'V', 'X' };
 const char squareOne[6][6] = { { 'p', 'h', '0', 'q', 'g', '6' },
-							 {  '4', 'm', 'e', 'a', 'l', 'y' },
+							 {  '4', 'm', 'e', 'a', '1', 'y' },
 							 {  'l', '2', 'n', 'o', 'f', 'd' },
 							 {  'x', 'k', 'r', '3', 'c', 'v' },
 							 {  's', '5', 'z', 'w', '7', 'b' },
@@ -74,7 +74,7 @@ int main() {
 			}
 
 			Sort(keywordAlpha);
-			
+
 			do {
 				cout << "Please input your message to be encrypted (256 max). ";
 				cin.ignore(1000, '\n');
@@ -83,7 +83,7 @@ int main() {
 
 				//Remove spaces in message
 				plaintext.erase(remove_if(plaintext.begin(), plaintext.end(), isspace), plaintext.end());
-				
+
 				//Check character length and that it's characters and digits
 				plaintextCheck = CheckMessageInput(plaintext);
 
@@ -119,7 +119,7 @@ int main() {
 			}
 
 			Sort(keywordAlpha);
-			
+
 			//Check for message to decrypt
 			do {
 				cout << "Please input your encrypted message to be deciphered (256 max). ";
@@ -151,17 +151,10 @@ int main() {
 
 void Encryption(int squareChoice, char keyword[], char keyWordSorted[], string plaintext) {
 
-	//Swap new arrays around to be in alphabetical ordered Keyword
-	//Print out each new area position by position with spaces between each 2 characters
 	char square[6][6] = { '\0' };
 	char cipherMid[43][6] = { '\0' };
-	cout << plaintext << endl;
-	for (int i = 0; i < plaintext.length(); i++) {
-		for (int j = 0; j < 6; j++) {
-			cipherMid[i][j] = NULL;
-		}
-	}
 
+	//Assign the square values based on the users choice
 	if (squareChoice == 1) {
 		for (int i = 0; i < 6; i++) {
 			for (int k = 0; k < 6; k++) {
@@ -183,12 +176,14 @@ void Encryption(int squareChoice, char keyword[], char keyWordSorted[], string p
 			}
 		}
 	}
+
+	//Convert the plaintext message to the ADFGVX variants by finding each character in the chosen square
+	//and assigning the row then colum as characters in its place. 
 	int m = 0, l = 0;
 	for (int i = 0; i < plaintext.length(); i++) {
 		for (int j = 0; j < 6; j++) {
 			for (int k = 0; k < 6; k++) {
 				if (plaintext[i] == square[j][k]) {
-					//cout << squareEdges[j] << squareEdges[k] << " ";
 
 					if (m < 6) {
 						cipherMid[l][m] = squareEdges[j];
@@ -209,122 +204,28 @@ void Encryption(int squareChoice, char keyword[], char keyWordSorted[], string p
 		}
 	}
 
-	char temp1[][6] = { '\0' };
-	if (strlen(*cipherMid) % 6 != 0)
-	{
-		// add letters to end of array
-		int len = (strlen(*cipherMid) + 6 -1) / 6;
-		temp1[len + 1][6] = 'X';
+	// EXAMPLE: Typed in: defend the east wall of the castle
+	// Converts to: defendtheeastwallofthecastle
+	// Above function changes it to this: FX DF FV DF FF FX  XG AD DF  DF DG VA XG  VG DG FA FA  FG FV  XG AD DF  GV DG VA XG FA DF
+
+	// Array must be divisable by 6 so we add G's to fill in the empty spots.						
+	int len = strlen(*cipherMid);
+	int lenMod = 6 - strlen(*cipherMid) % 6;
+	int rowPos = (len - strlen(*cipherMid) % 6) / 6;
+	if (strlen(*cipherMid) % 6 != 0) {
+		for (int i = (strlen(*cipherMid) % 6); i < 6; i++) {
+			if (i < 6) {
+				cipherMid[rowPos][i] = 'G';
+			}
+		}
 	}
-	
-	
+
+	//Capitalize the keyword.
 	for (int i = 0; i < strlen(keyword); i++) {
 		keyword[i] = toupper(keyword[i]);
 	}
 
-	// makes a temp 2D array of cipher text in column format
-	char temp[43][6]= { '/0' };
-	
-	for (int i = 0; i < 6; i++)
-	{
-		for (int k = 0; k < 6; k++)
-		{
-			temp[i][k] = cipherMid[i][k];
-		}
-	}
-
-	// swaps the columns that correspond to the alphabetized keyword 
-	for (int i = 0; i < 6; i++)
-	{
-		for (int k = 0; k < 6; k++)
-		{
-			if (keyword[i] == keyWordSorted[k])
-			{
-				for (int j = 0; j < 43; j++)
-				{
-					swap(cipherMid[j][i], temp[j][k]);
-				}
-			}
-		}
-	}
-	cout << '\n' << "Your ciphertext message is: ";
-	// prints out ciphertext
-	for (int i = 0; i < 6; i++) {
-		for (int j = 0; j < plaintext.length(); j++) {
-			if (temp[j][i] != NULL)
-			{
-				cout << temp[j][i];
-			} 
-		}
-	}
-	cout << endl << endl;
-}
-
-void Decryption(int squareChoice, char keyword[], char keyWordSorted[], string ciphertext) {
-	char square[6][6] = { '\0' };
-	char cipherMid[43][6] = { '\0' };
-
-	for (int i = 0; i < 43; i++) {
-		for (int j = 0; j < 6; j++) {
-			cipherMid[i][j] = ' ';
-		}
-	}
-
-	if (squareChoice == 1) {
-		for (int i = 0; i < 6; i++) {
-			for (int k = 0; k < 6; k++) {
-				square[i][k] = squareOne[i][k];
-			}
-		}
-	}
-	else if (squareChoice == 2) {
-		for (int i = 0; i < 6; i++) {
-			for (int k = 0; k < 6; k++) {
-				square[i][k] = squareTwo[i][k];
-			}
-		}
-	}
-	else if (squareChoice == 3) {
-		for (int i = 0; i < 6; i++) {
-			for (int k = 0; k < 6; k++) {
-				square[i][k] = squareThree[i][k];
-			}
-		}
-	}
-	// take in message
-	// put message in square by column
-	// 
-	/*int m = 0, l = 0;
-	for (int i = 0; i < ciphertext.length(); i++) {
-		for (int j = 0; j < 6; j++) {
-			for (int k = 0; k < 6; k++) {
-				if (plaintext[i] == square[j][k]) {
-					//cout << squareEdges[j] << squareEdges[k] << " ";
-
-					if (m < 6) {
-						cipherMid[l][m] = squareEdges[j];
-						m++;
-						cipherMid[l][m] = squareEdges[k];
-						m++;
-					}
-					else if (m == 6) {
-						l++;
-						m = 0;
-						cipherMid[l][m] = squareEdges[j];
-						m++;
-						cipherMid[l][m] = squareEdges[k];
-						m++;
-					}
-				}
-			}
-		}
-	}*/
-
-	for (int i = 0; i < strlen(keyword); i++) {
-		keyword[i] = toupper(keyword[i]);
-	}
-
-	// makes a temp 2D array of cipher text in column format
+	//Makes a temp 2D array of cipher text in column format
 	char temp[43][6] = { '/0' };
 
 	for (int i = 0; i < 6; i++)
@@ -335,7 +236,7 @@ void Decryption(int squareChoice, char keyword[], char keyWordSorted[], string c
 		}
 	}
 
-	// swaps the columns that correspond to the alphabetized keyword 
+	//Swaps the columns that correspond to the alphabetized keyword 
 	for (int i = 0; i < 6; i++)
 	{
 		for (int k = 0; k < 6; k++)
@@ -349,13 +250,101 @@ void Decryption(int squareChoice, char keyword[], char keyWordSorted[], string c
 			}
 		}
 	}
-	cout << '\n' << "Your plaintext message is: ";
-	// prints out plaintext
+
+	//Prints out ciphertext
+	cout << '\n' << "Your ciphertext message is: ";
 	for (int i = 0; i < 6; i++) {
-		for (int j = 0; j < 43; j++) {
-			if (temp[j][i] != ' ')
-			{
+		for (int j = 0; j < plaintext.length(); j++) {
+			if (temp[j][i] != NULL) {
 				cout << temp[j][i];
+			}
+		}
+	}
+	cout << endl << endl;
+}
+
+void Decryption(int squareChoice, char keyword[], char keyWordSorted[], string ciphertext) {
+
+	char square[6][6] = { '\0' };
+	char cipherMid[43][6] = { '\0' };
+
+	//Assign the square values based on the users choice
+	if (squareChoice == 1) {
+		for (int i = 0; i < 6; i++) {
+			for (int k = 0; k < 6; k++) {
+				square[i][k] = squareOne[i][k];
+			}
+		}
+	}
+	else if (squareChoice == 2) {
+		for (int i = 0; i < 6; i++) {
+			for (int k = 0; k < 6; k++) {
+				square[i][k] = squareTwo[i][k];
+			}
+		}
+	}
+	else if (squareChoice == 3) {
+		for (int i = 0; i < 6; i++) {
+			for (int k = 0; k < 6; k++) {
+				square[i][k] = squareThree[i][k];
+			}
+		}
+	}
+
+	//Assigns the ciphertext input to temp as a 2d array
+	int len = ciphertext.length();
+	int rows = ciphertext.length() / 6;
+	int j = 0;
+	char temp[43][6] = { '/0' };
+
+	for (int i = 0; i < 6; i++)
+	{
+		for (int k = 0; k < rows; k++)
+		{
+			temp[k][i] = ciphertext[j];
+			j++;
+		}
+	}
+
+	//Capitalize the keyword.
+	for (int i = 0; i < strlen(keyword); i++) {
+		keyword[i] = toupper(keyword[i]);
+	}
+
+	//Swaps the columns that correspond to the alphabetized keyword
+	for (int i = 0; i < 6; i++)
+	{
+		for (int k = 0; k < 6; k++)
+		{
+			if (keyWordSorted[i] == keyword[k])
+			{
+				for (int j = 0; j < 43; j++)
+				{
+					swap(temp[j][i], cipherMid[j][k]);
+				}
+			}
+		}
+	}
+
+	//EXAMPLE: Input was FFDVDFADFGXFGFGAVFAFFDXDXFFDVDFFDGGAGVGGVXFAGGDGAGDFADVFXGXG
+	//keyword was German
+	//Output not using alphabatized keyword is FXFFVDFFDFXFDGXDFAVFDGADDGXGGVFAFAGFAVFGDXDFDVGGFAVGAXGFDGGG
+	//After swap FXDFFVDFFFFXXGADDFDFDGVAXGVGDGFAFAFGFVXGADDFGVDGVAXGFADFGGGG
+	cout << endl;
+	cout << "Your plaintext message is: ";
+	for (int i = 0; i < rows; i++) {
+		for (int j = 0; j < 6; j++) {
+			for (int k = 0; k < 6; k++) {
+				if (cipherMid[i][j] == squareEdges[k]) {
+					for (int l = 0; l < 6; l++) {
+						if (cipherMid[i][j + 1] == squareEdges[l]) {
+							//Prints out plaintext
+							cout << square[k][l];
+							k = 6;
+						}
+					}
+					j++;
+				}
 			}
 		}
 	}
@@ -442,5 +431,4 @@ void Sort(char array[]) {
 		}
 		pass++;
 	}
-	//array[6] = '\0';
 }
